@@ -1,14 +1,3 @@
-/*Feito em Trio - Nádia Winy, Ranyelle dos Santos e Kaio Vinícus - ADS 4M ED2 - 021*/
-
-create database Clinica;
-use Clinica;
-
-create table Ambulatorios (
-	nroa int ,
-    andar numeric(3) not null,
-    capacidade smallint,
-    primary key (nroa)
-);
 
 insert into Ambulatorios (nroa, andar, capacidade)
 		values  (1, 1, 30),
@@ -17,34 +6,12 @@ insert into Ambulatorios (nroa, andar, capacidade)
 				(4, 2, 25),
 				(5, 2, 55);
 
-create table Medicos (
-	codm int,
-    nome varchar (40) not null,
-    idade smallint not null,
-    especialidade char (20),
-    CPF numeric (11) unique,
-    cidade varchar (30),
-    nroa int,
-    primary key (codm),
-    foreign key (nroa) references Ambulatorios (nroa)
- );
-
  insert into Medicos (codm, nome, idade, especialidade, CPF, cidade, nroa)
 		values  (1, 'João', 40, '0rtopedia', 10000100000, 'Florianopolis', 1),
 				(2, 'Maria', 42, 'traumatologia', 10000110000, 'Blumenau', 2),
 				(3, 'Pedro', 51, 'pediatria', 11000100000, 'São José', 2),
 				(4, 'Carlos', 28, 'ortopedia', 11000110000, 'Joinville', null),
 				(5, 'Marcia', 33, 'neurologia', 11000111000, 'Biguacu', 3);
-    
-create table Pacientes (
-	codp int,
-    nome varchar(40) not null,
-    idade smallint not null,
-    cidade varchar (30),
-    CPF numeric (11) unique,
-    doenca varchar (40) not null,
-    primary key (codp)
-);
 
 insert into Pacientes (codp, nome, idade, cidade, CPF, doenca)
 		values  (1, 'Ana', 20, 'Florianopolisa', 20000200000, 'gripe'),
@@ -52,20 +19,6 @@ insert into Pacientes (codp, nome, idade, cidade, CPF, doenca)
 				(3, 'Lucia', 30, 'Biguacu', 22000200000, 'tendinite'),
 				(4, 'Carlos', 28, 'Joinville', 11000110000, 'Sarampo');
     
-    
-create table Funcionarios (
-	codf int,
-    nome varchar (40) not null,
-    idade smallint,
-    CPF numeric(11) unique,
-    cidade varchar (30),
-    salario numeric (10),
-    cargo varchar (20),
-    primary key (codf)
-);
-
--- 03 
-alter table Funcionarios add nroa int;
 
 insert into Funcionarios (codf, nome, idade, CPF, cidade, salario, cargo, nroa)
 		values  (1, 'Rita', 32, 20000100000, 'São Jose', 1200, 'Recepcionista', 1),
@@ -73,15 +26,6 @@ insert into Funcionarios (codf, nome, idade, CPF, cidade, salario, cargo, nroa)
 				(3, 'Caio', 45, 41000100000, 'Florianopolis', 1100, 'Gerente', 1),
 				(4, 'Carlos', 44, 50000110000, 'Florianopolis', 1200, 'Aux. Laboratório', 3),
 				(5, 'Paula', 33, 61000111000, 'Florianopolis', 2500, 'Aux. Administrativo', 2);
-
-create table Consultas (
-    codm int,
-    codp int,
-    data date,
-    hora time,
-    FOREIGN KEY (codm) REFERENCES Medicos(codm),
-    FOREIGN KEY (codp) REFERENCES Pacientes(codp) on delete cascade
-);
 
 insert into Consultas (codm, codp, data, hora)
 		values  (1, 1, '2006-06-12', '14:00'),
